@@ -9,18 +9,32 @@ A IDEIA É USAR A FUNÇÃO INPUT PRA MUDAR A URL NA SOURCE, O INPUT VAI SER O NO
 from bs4 import BeautifulSoup
 import requests
 import csv
+from time import sleep
 
-source = requests.get('https://www.pensador.com/autor/clarice_lispector/').text
-soup = BeautifulSoup(source, 'html.parser')
-csv_cits = open('cits_pens.csv', 'w') #citações baixadas
+url = "https://pensador.com/autor/machado_de_assis/" #adc a url num objeto
 
-csv_writer = csv.writer(csv_cits) #criação do arquivo com as citações
-csv_writer.writerow(['pensador', 'citações','link da citação']) #adc os nomes das colunas
+font = requests.get(url)
 
-for pensamento in soup.find_all('thought-card'):
-    frase = pensamento.p.text
+soup = BeautifulSoup(font.content, 'html.parser')
 
-    print()
+pensamentos = soup.find_all('p', class_='frase fr')
 
-    csv_cits.close()
+#loop pra baixar as frases
+
+for pensamento in pensamentos:
+    print(f'"{pensamento.text}" - Machads')
+
+
+# print(soup)
+
+# csv_cits = open('cits_pens.csv', 'w') #citações baixadas
+#
+# csv_writer = csv.writer(csv_cits) #criação do arquivo com as citações
+# csv_writer.writerow(['pensador', 'citações','link da citação']) #adc os nomes das colunas
+#
+
+#
+#     print()
+#
+#     csv_cits.close()
 

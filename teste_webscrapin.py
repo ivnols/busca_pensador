@@ -1,6 +1,6 @@
 """
 SCRIPT DE WEBSCRAPING SEGUINDO O TUTORIAL DE COREY SCHAFER (coreyms.com)
-NO TUTORIAL ELE USA O ARGUMENTO 'lxml' NO LUGAR DE 'html.parser'...
+NO TUTORIAL ELE USA O ARGUMEN   TO 'lxml' NO LUGAR DE 'html.parser'...
 """
 from bs4 import BeautifulSoup
 import requests
@@ -9,6 +9,8 @@ import csv
 source = requests.get('https://coreyms.com').text #objeto que avisa qual página vc vai pegar as info
 
 soup = BeautifulSoup(source, 'html.parser') #cria o objeto com as informações do html (código fonte)
+
+print(soup)
 
 csv_file = open('cms_scrape.csv', 'w') #esse w é pra 'write csv'
 
@@ -43,18 +45,18 @@ for article in soup.find_all('article'):
 
     csv_writer.writerow([headline, summary, yt_link])
 
-csv_file.close()
-
-# comando pra pegar informação de link do vídeo que tem no artigo
-
-# transforma o link do vídeo numa lista. cada elemento do link vira um elemento da lista
-# pega uma determinada informação do link
-
-      # isso é o link real pro vídeo
-
-
-#try funciona como um tipo de exceção
-
-
-#print(article.prettify()) #.prettify mostra as info do html com a mesma formatação
-
+# csv_file.close()
+#
+# # comando pra pegar informação de link do vídeo que tem no artigo
+#
+# # transforma o link do vídeo numa lista. cada elemento do link vira um elemento da lista
+# # pega uma determinada informação do link
+#
+#       # isso é o link real pro vídeo
+#
+#
+# #try funciona como um tipo de exceção
+#
+#
+# #print(article.prettify()) #.prettify mostra as info do html com a mesma formatação
+#
