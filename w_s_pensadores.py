@@ -17,24 +17,27 @@ font = requests.get(url)
 
 soup = BeautifulSoup(font.content, 'html.parser')
 
+csv_cits = open('cits_pens.csv', 'w') #citações baixadas
+csv_writer = csv.writer(csv_cits) #criação do arquivo com as citações
+csv_writer.writerow(['pensamento','autor'])
+
 pensamentos = soup.find_all('p', class_='frase fr')
+
+autor = soup.find_all('span', class_='autor')
 
 #loop pra baixar as frases
 
 for pensamento in pensamentos:
     print(f'"{pensamento.text}" - Machads')
 
+    csv_writer.writerow([pensamentos, autor])  # adc os nomes das colunas
 
-# print(soup)
+"""
+FUNCIONA, MAS PRECISA COLOCAR CADA FRASE EM UMA LINHA
+ESTÃO TODAS SE REPETINDO NUMA MESMA LINHA (VÁRIAS VEZES)
+"""
 
-# csv_cits = open('cits_pens.csv', 'w') #citações baixadas
-#
-# csv_writer = csv.writer(csv_cits) #criação do arquivo com as citações
-# csv_writer.writerow(['pensador', 'citações','link da citação']) #adc os nomes das colunas
-#
-
-#
-#     print()
-#
-#     csv_cits.close()
+"""
+SERÁ QUE DÁ PRA BAIXAR AS FRASES COMO UMA LISTA?
+"""
 
